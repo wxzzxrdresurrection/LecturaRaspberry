@@ -12,7 +12,7 @@ class Sensor:
         GPIO.setmode(GPIO.BOARD)
 
     def __str__(self):
-        return {'tipo': self.tipo, 'id': self.id, 'pines': self.pines}
+        return {'tipo': self.tipo, 'id': self.id, 'fecha' : self.fecha, 'hora':self.hora, 'pines': self.pines}
     
     def seleccionarTipo(self,tipo):
         if tipo == "Ultrasonico":
@@ -66,3 +66,7 @@ class Sensor:
             else:
                 print('Opcion invalida')
 
+if __name__ == "__main__":
+    sensor = Sensor("Temperatura","1",[4])
+    sensor.usarLed(34)
+    
