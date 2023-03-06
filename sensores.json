@@ -1,0 +1,23 @@
+[
+    {
+        "tipo": "Temperatura",
+        "id": "T1",
+        "descripcion": "S/Desc",
+        "pines": [
+            4
+        ],
+        "hora": "14:57:34",
+        "fecha": "06/03/23"
+    },
+    {
+        "tipo": "Ultrasonico",
+        "id": "US1",
+        "descripcion": "S/Desc",
+        "pines": [
+            7,
+            8
+        ],
+        "hora": "14:57:34",
+        "fecha": "06/03/23"
+    }
+]

@@ -1,72 +1,63 @@
-import RPi.GPIO as GPIO
+#import RPi.GPIO as GPIO
 import time 
+from Lista import Lista
 #import adafruit_dht
-class Sensor:
+class Sensor(Lista):
     
-    def __init__(self, tipo="S/T", id="S/ID",fecha= time.strftime("%d/%m/%y"),hora= time.strftime("%H:%M:%S"),pines=[]):
+    def __init__(self, tipo="S/T", id="S/ID",pines=[],descripcion="S/Desc"):
         self.tipo = tipo
         self.id = id
         self.pines = pines
-        self.fecha = fecha
-        self.hora = hora
-        GPIO.setmode(GPIO.BOARD)
+        self.descripcion = descripcion
+        super().__init__()
+        #GPIO.setmode(GPIO.BOARD)
 
     def __str__(self):
-        return {'tipo': self.tipo, 'id': self.id, 'fecha' : self.fecha, 'hora':self.hora, 'pines': self.pines}
+        if len(self.lista) > 1 :
+            return f"La lista contiene {len(self.lista)} sensores"
+        else:
+            return f'tipo: {self.tipo}, id: {self.id}, descripcion : {self.descripcion}, pines: {self.pines}'
     
-    def seleccionarTipo(self,tipo):
-        if tipo == "Ultrasonico":
-            self.usarUltrasonico(self.pines)
-        elif tipo == "Temperatura":
-            self.usarTemperatura(self.pines)
-        elif tipo == "LED":
-            self.usarLed(self.pines)
+    def getDict(self):
+        if len(self.lista) > 1 :
+            arreglo = []
+            for item in self.lista:
+                arreglo.append(item.getDict())
+            return arreglo
+        else:
+            return  {
+                        'tipo': self.tipo,
+                        'id': self.id, 
+                        'descripcion' : self.descripcion,
+                        'pines' : self.pines,
+                        'hora':time.strftime("%H:%M:%S", time.localtime()),
+                        'fecha':time.strftime("%d/%m/%y", time.localtime())
+                    }
 
-    #METODOS PARA LEER EL SENSOR Y MANDAR INFORMACION
-    def usarUltrasonico(self,pines):
-        GPIO.setup(pines[0],GPIO.OUT)
-        GPIO.setup(pines[1],GPIO.IN)
-
-        GPIO.output(pines[0], GPIO.HIGH)
-        time.sleep(0.00001)
-        GPIO.output(pines[0], GPIO.LOW)
-        while GPIO.input(pines[1]) == GPIO.LOW:
-            pulse_start = time.time()
-        while GPIO.input(pines[1]) == GPIO.HIGH:
-            pulse_end = time.time()
-        pulse_duration = pulse_end - pulse_start
-        distance = pulse_duration * 17150
-        distance = round(distance, 2)
-        return distance
-
-    #METODOS PARA LEER EL SENSOR Y MANDAR INFORMACION
-    def usarTemperatura(self,pin):
-        sensortemp = adafruit_dht.DHT11(pin)
-        temperature_c = sensortemp.temperature
-        temperature_f = temperature_c * (9 / 5) + 32
-        humidity = sensortemp.humidity
-        return temperature_c,temperature_f,humidity
+    def getType(self,sensor):
+        return sensor.tipo
     
-
-    def usarLed(self,pin):
-        GPIO.setup(pin,GPIO.OUT)    
-        x = 1
-        while x == 1:
-            print('Que desea hacer con el led')
-            print('1. Encender')
-            print('2. Apagar')
-            print('3. Salir')
-            opt = int(input('Opcion: '))
-            if opt == '1':
-                GPIO.output(pin,True)
-            elif opt == '2':
-                GPIO.output(pin,False)
-            elif opt == '3':
-                x = 0
-            else:
-                print('Opcion invalida')
+    def read(self,tipo):
+        if tipo == "Temperatura":
+            return self.readTemp()
+        elif tipo == "Humedad":
+            return self.readHum()
+        elif tipo == "Luz":
+            return self.readLuz()
+        elif tipo == "Ultrasonico":
+            return self.readUltra()
+        else:
+            return "Error"
+        
 
 if __name__ == "__main__":
-    sensor = Sensor("Temperatura","1",[4])
-    sensor.usarLed(34)
-    
+    listasensores = Sensor()
+    sensor1 = Sensor("Temperatura", "T1",[4])
+    print(sensor1)
+    listasensores.agregar(sensor1)
+    sensor2 = Sensor("Ultrasonico", "US1",[7,8])
+    listasensores.agregar(sensor2)
+    print(listasensores)
+    listasensores.guardarjson("sensores",listasensores.getDict())
+
+
