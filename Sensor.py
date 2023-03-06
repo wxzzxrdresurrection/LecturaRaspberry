@@ -52,7 +52,7 @@ class Sensor:
         GPIO.setup(pin,GPIO.OUT)    
         x = 1
         while x == 1:
-            print('¿Que desea hacer con el led?')
+            print('Que desea hacer con el led')
             print('1. Encender')
             print('2. Apagar')
             print('3. Salir')
