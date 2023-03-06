@@ -16,22 +16,37 @@ class Sensor:
     
     def seleccionarTipo(self,tipo):
         if tipo == "Ultrasonico":
-            pass
+            self.usarUltrasonico(self.pines)
         elif tipo == "Temperatura":
-            pass
+            self.usarTemperatura(self.pines)
         elif tipo == "LED":
-            pass
+            self.usarLed(self.pines)
 
     #METODOS PARA LEER EL SENSOR Y MANDAR INFORMACION
     def usarUltrasonico(self,pines):
         GPIO.setup(pines[0],GPIO.OUT)
         GPIO.setup(pines[1],GPIO.IN)
-        pass
+
+        GPIO.output(pines[0], GPIO.HIGH)
+        time.sleep(0.00001)
+        GPIO.output(pines[0], GPIO.LOW)
+        while GPIO.input(pines[1]) == GPIO.LOW:
+            pulse_start = time.time()
+        while GPIO.input(pines[1]) == GPIO.HIGH:
+            pulse_end = time.time()
+        pulse_duration = pulse_end - pulse_start
+        distance = pulse_duration * 17150
+        distance = round(distance, 2)
+        return distance
 
     #METODOS PARA LEER EL SENSOR Y MANDAR INFORMACION
     def usarTemperatura(self,pin):
-        GPIO.setup(pin,GPIO.OUT)
-        pass
+        sensortemp = adafruit_dht.DHT11(pin)
+        temperature_c = sensortemp.temperature
+        temperature_f = temperature_c * (9 / 5) + 32
+        humidity = sensortemp.humidity
+        return temperature_c,temperature_f,humidity
+    
 
     def usarLed(self,pin):
         GPIO.setup(pin,GPIO.OUT)    
