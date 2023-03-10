@@ -1,0 +1,12 @@
+[
+    {
+        "clave": "US1",
+        "tipo": "Ultrasonico",
+        "id": "US1",
+        "descripcion": "Puerta",
+        "pines": [
+            7,
+            8
+        ]
+    }
+]

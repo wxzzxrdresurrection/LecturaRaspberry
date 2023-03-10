@@ -1,8 +1,10 @@
-import RPi.GPIO as GPIO
+#import RPi.GPIO as GPIO
 import time 
 from Lista import Lista
-import Adafruit_DHT
-from gpiozero import LED
+#import Adafruit_DHT
+#from gpiozero import LED
+from SensorValor import SensorValor
+
 class Sensor(Lista):
     
     def __init__(self,clave ="S/C" ,tipo="S/T", id="S/ID",pines=[],descripcion="S/Desc"):
@@ -11,8 +13,9 @@ class Sensor(Lista):
         self.id = id
         self.pines = pines
         self.descripcion = descripcion
+        self.listasensorvalor = SensorValor()
         super().__init__()
-        GPIO.setmode(GPIO.BCM)
+ #       GPIO.setmode(GPIO.BCM)
 
     def __str__(self):
         if len(self.lista) > 0:
@@ -22,6 +25,11 @@ class Sensor(Lista):
     
     def crearSensor(self):
         listasensores = Sensor()
+        try: 
+            listasensores = self.getObjfromList("listasensores")
+        except:
+            print("Archivo no existente")
+        clave = input("Ingrese la clave del sensor: ")
         tipo = input("Ingrese el tipo de sensor: ")
         id = input("Ingrese el id del sensor: ")
         npines = input("¿Cuantos pines tiene el sensor?")
@@ -30,11 +38,18 @@ class Sensor(Lista):
             pin = int(input("Ingrese el pin: "))
             pines.append(pin)
         descripcion = input("Ingrese la descripcion del sensor: ")
-        sns = Sensor(tipo,id,pines,descripcion)
+        sns = Sensor(clave,tipo,id,pines,descripcion)
         listasensores.agregar(sns)
         print(listasensores)
         self.guardarjson('listasensores',listasensores.getDict())
         print(sns)
+
+    def getObjfromList(self,archivo):
+        data = self.leerjson(archivo)
+        for p in data:
+            listasensores = Sensor()
+            listasensores.agregar(Sensor(p['clave'],p['tipo'],p['id'],p['pines'],p['descripcion']))
+        return listasensores
 
     def getDict(self):
         if len(self.lista) > 0 :
@@ -44,12 +59,11 @@ class Sensor(Lista):
             return arreglo
         else:
             return  {
+                        'clave': self.clave,
                         'tipo': self.tipo,
                         'id': self.id, 
                         'descripcion' : self.descripcion,
                         'pines' : self.pines,
-                        'hora':time.strftime("%H:%M:%S", time.localtime()),
-                        'fecha':time.strftime("%d/%m/%y", time.localtime())
                     }
 
     def getType(self,sensor):
@@ -58,27 +72,33 @@ class Sensor(Lista):
     def read(self,sensor):
         tipo = self.getType(sensor)
         if tipo == "DHT11":
-            return self.readTemp()
-        elif tipo == "LUZ":
-            return self.readLuz()
+            return self.readTemp(sensor)
         elif tipo == "US":
-            return self.readUltra()
+            return self.readUltra(sensor)
         elif tipo == "LED":
             return self.estadoLed()
         else:
             return "Error"
         
-    def readTemp(self,pin):
+    def readTemp(self,sensor):
+        """
         dhtDevice = Adafruit_DHT.DHT11
+        pin = sensor.pines[0]
         try:
-            humedad, temperatura = dhtDevice.read(pin[0])
+            humedad, temperatura = dhtDevice.read(pin)
+            sensorvalor = SensorValor(sensor,temperatura,time.strftime("%d/%m/%y"),time.strftime("%H:%M:%S"))
+            sensorvalor2 = SensorValor(sensor,humedad,time.strftime("%d/%m/%y"),time.strftime("%H:%M:%S"))
+            print(sensorvalor)
+            print(sensorvalor2)
             return temperatura, humedad
         except:
             return "Error"
+            """
      
-    def readUltra(self,pines):
-        trigger = pines[0]
-        echo = pines[1]
+    def readUltra(self,sensor):
+        """
+        trigger = sensor.pines[0]
+        echo = sensor.pines[1]
         GPIO.setup(trigger, GPIO.OUT)
         GPIO.setup(echo, GPIO.IN)
 
@@ -94,9 +114,13 @@ class Sensor(Lista):
         pulse_duration = pulse_end - pulse_start
         distance = pulse_duration * 17150
         distance = round(distance, 2)
+        sensorvalor = SensorValor(sensor,distance,time.strftime("%d/%m/%y"),time.strftime("%H:%M:%S"))
+        print(sensorvalor)
         return distance
+        """
 
     def estadoLed(self):
+        """
         led = LED(17)
         if led.is_lit:
             led.on()
@@ -104,11 +128,14 @@ class Sensor(Lista):
         else:
             led.off()
             return "Apagado"
+            """
 
         
 
 if __name__ == "__main__":
-    sns = Sensor()
+    while True:
+        sns = Sensor()
+        sns.crearSensor()
     
     
 
