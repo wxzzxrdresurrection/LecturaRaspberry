@@ -34,7 +34,7 @@ class Sensor(Lista):
         clave = input("Ingrese la clave del sensor: ")
         tipo = input("Ingrese el tipo de sensor: ")
         id = input("Ingrese el id del sensor: ")
-        npines = input("¿Cuantos pines tiene el sensor?")
+        npines = input("Cuantos pines tiene el sensor: ")
         pines = []
         for i in range(int(npines)):
             pin = int(input("Ingrese el pin: "))
