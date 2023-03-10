@@ -123,11 +123,14 @@ class Sensor(Lista):
 
     def estadoLed(self,sensor):
         pin = sensor.pines[0]
+        print(pin)
         led = LED(pin)
         if led.is_lit:
+            print("ENCENDER")
             led.on()
             return "Encendido"
         else:
+            print("APAGAR")
             led.off()
             return "Apagado"
 
