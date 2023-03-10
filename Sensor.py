@@ -21,7 +21,8 @@ class Sensor(Lista):
 
     def __str__(self):
         if len(self.lista) > 0:
-            return f"La lista contiene {len(self.lista)} sensores"
+            longitud =len(self.lista)
+            return f"La lista contiene {longitud} sensores"
         else:
             return f'tipo: {self.tipo}, id: {self.id}, descripcion : {self.descripcion}, pines: {self.pines}'
     
