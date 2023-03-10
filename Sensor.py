@@ -121,8 +121,9 @@ class Sensor(Lista):
         return distance
         """
 
-    def estadoLed(self):
-        led = LED(17)
+    def estadoLed(self,sensor):
+        pin = sensor.pines[0]
+        led = LED(pin)
         if led.is_lit:
             led.on()
             return "Encendido"
