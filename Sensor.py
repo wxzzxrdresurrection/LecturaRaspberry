@@ -1,7 +1,7 @@
-import RPi.GPIO as GPIO
+#import RPi.GPIO as GPIO
 import time 
 from Lista import Lista
-import Adafruit_DHT
+#import Adafruit_DHT
 from gpiozero import LED
 from Mongo import Mongo
 from SensorValor import SensorValor
@@ -83,6 +83,7 @@ class Sensor(Lista):
             return "Error"
         
     def readTemp(self,sensor):
+        """
         dhtDevice = Adafruit_DHT.DHT11
         pin = sensor.pines[0]
         try:
@@ -94,8 +95,10 @@ class Sensor(Lista):
             return temperatura, humedad
         except:
             return "Error"
+            """
      
     def readUltra(self,sensor):
+        """
         trigger = sensor.pines[0]
         echo = sensor.pines[1]
         GPIO.setup(trigger, GPIO.OUT)
@@ -116,6 +119,7 @@ class Sensor(Lista):
         sensorvalor = SensorValor(sensor,distance,time.strftime("%d/%m/%y"),time.strftime("%H:%M:%S"))
         print(sensorvalor)
         return distance
+        """
 
     def estadoLed(self):
         led = LED(17)
