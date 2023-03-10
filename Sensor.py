@@ -76,7 +76,7 @@ class Sensor(Lista):
         print(tipo)
         if tipo == "DHT11":
             return self.readTemp(sensor)
-        elif tipo == "US":
+        elif tipo == "Ultrasonico":
             return self.readUltra(sensor)
         elif tipo == "LED":
             return self.estadoLed(sensor)
@@ -104,21 +104,22 @@ class Sensor(Lista):
         GPIO.setup(trigger, GPIO.OUT)
         GPIO.setup(echo, GPIO.IN)
 
-        GPIO.output(trigger, False)
-        time.sleep(0.5)
-        GPIO.output(trigger, True)
-        time.sleep(0.00001)
-        GPIO.output(trigger, False)
-        while GPIO.input(echo) == GPIO.LOW:
-            pulse_start = time.time()
-        while GPIO.input(echo) == GPIO.HIGH:
-            pulse_end = time.time()
-        pulse_duration = pulse_end - pulse_start
-        distance = pulse_duration * 17150
-        distance = round(distance, 2)
-        sensorvalor = SensorValor(sensor,distance,time.strftime("%d/%m/%y"),time.strftime("%H:%M:%S"))
-        print(sensorvalor)
-        return distance
+        while True:
+            GPIO.output(trigger, False)
+            time.sleep(0.5)
+            GPIO.output(trigger, True)
+            time.sleep(0.00001)
+            GPIO.output(trigger, False)
+            while GPIO.input(echo) == GPIO.LOW:
+                pulse_start = time.time()
+            while GPIO.input(echo) == GPIO.HIGH:
+                pulse_end = time.time()
+            pulse_duration = pulse_end - pulse_start
+            distance = pulse_duration * 17150
+            distance = round(distance, 2)
+            sensorvalor = SensorValor(sensor,distance,time.strftime("%d/%m/%y"),time.strftime("%H:%M:%S"))
+            print(sensorvalor)
+            return distance
     
     def estadoLed(self,sensor):
         pin = sensor.pines[0]
