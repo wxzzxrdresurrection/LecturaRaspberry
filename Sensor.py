@@ -129,12 +129,13 @@ class Sensor(Lista):
     
     def estadoLed(self,sensor):
         pin = sensor.pines[0]
+        GPIO.setup(pin,GPIO.OUT)
         print(pin)
-        led = LED(2)
+        GPIO.output(2,GPIO.HIGH)
         print("ENCENDER")
-        led.value = 1
+        GPIO.output(2,GPIO.HIGH)
         print("APAGAR")
-        led.value = 0
+        
         
 
 
