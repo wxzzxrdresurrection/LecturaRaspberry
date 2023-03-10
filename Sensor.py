@@ -15,7 +15,7 @@ class Sensor(Lista):
         self.pines = pines
         self.descripcion = descripcion
         self.listasensorvalor = SensorValor()
-        self.mongo = Mongo()
+        #self.mongo = Mongo()
         super().__init__()
  #       GPIO.setmode(GPIO.BCM)
 
