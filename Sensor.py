@@ -103,16 +103,19 @@ class Sensor(Lista):
         echo = sensor.pines[1]
         GPIO.setup(trigger, GPIO.OUT)
         GPIO.setup(echo, GPIO.IN)
-
+        print("Iniciando sensor")
         while True:
             GPIO.output(trigger, False)
             time.sleep(0.5)
             GPIO.output(trigger, True)
             time.sleep(0.00001)
             GPIO.output(trigger, False)
+            print("Esperando respuesta")
             while GPIO.input(echo) == GPIO.LOW:
+                print("Esperando")
                 pulse_start = time.time()
             while GPIO.input(echo) == GPIO.HIGH:
+                print("Esperando2")
                 pulse_end = time.time()
             pulse_duration = pulse_end - pulse_start
             distance = pulse_duration * 17150
