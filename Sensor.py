@@ -23,7 +23,7 @@ class Sensor(Lista):
         if len(self.lista) > 0:
             longitud =len(self.lista)
         else:
-            return f'tipo: {self.tipo}, id: {self.id}, descripcion : {self.descripcion}, pines: {self.pines}'
+            pass
     
     def crearSensor(self):
         listasensores = Sensor()
