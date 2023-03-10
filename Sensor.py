@@ -1,4 +1,4 @@
-#import RPi.GPIO as GPIO
+import RPi.GPIO as GPIO
 import time 
 from Lista import Lista
 #import Adafruit_DHT
@@ -99,7 +99,6 @@ class Sensor(Lista):
             """
      
     def readUltra(self,sensor):
-        """
         trigger = sensor.pines[0]
         echo = sensor.pines[1]
         GPIO.setup(trigger, GPIO.OUT)
@@ -120,8 +119,7 @@ class Sensor(Lista):
         sensorvalor = SensorValor(sensor,distance,time.strftime("%d/%m/%y"),time.strftime("%H:%M:%S"))
         print(sensorvalor)
         return distance
-        """
-
+    
     def estadoLed(self,sensor):
         pin = sensor.pines[0]
         print(pin)
