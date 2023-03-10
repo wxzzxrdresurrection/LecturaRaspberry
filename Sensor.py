@@ -73,6 +73,7 @@ class Sensor(Lista):
     
     def read(self,sensor):
         tipo = self.getType(sensor)
+        print(tipo)
         if tipo == "DHT11":
             return self.readTemp(sensor)
         elif tipo == "US":
