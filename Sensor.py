@@ -114,6 +114,7 @@ class Sensor(Lista):
             while GPIO.input(echo) == GPIO.LOW:
                 print("Esperando")
                 pulse_start = time.time()
+                return pulse_start
             while GPIO.input(echo) == GPIO.HIGH:
                 pulse_end = time.time()
                 pulse_duration = pulse_end - pulse_start
