@@ -78,7 +78,7 @@ class Sensor(Lista):
         elif tipo == "US":
             return self.readUltra(sensor)
         elif tipo == "LED":
-            return self.estadoLed()
+            return self.estadoLed(sensor)
         else:
             return "Error"
         
