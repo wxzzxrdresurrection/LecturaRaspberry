@@ -17,7 +17,7 @@ class Sensor(Lista):
         self.listasensorvalor = SensorValor()
         #self.mongo = Mongo()
         super().__init__()
- #       GPIO.setmode(GPIO.BCM)
+        GPIO.setmode(GPIO.BCM)
 
     def __str__(self):
         if len(self.lista) > 0:
@@ -119,7 +119,7 @@ class Sensor(Lista):
             distance = round(distance, 2)
             sensorvalor = SensorValor(sensor,distance,time.strftime("%d/%m/%y"),time.strftime("%H:%M:%S"))
             print(sensorvalor)
-            return distance
+            print("Distance:",distance,"cm")
     
     def estadoLed(self,sensor):
         pin = sensor.pines[0]
