@@ -28,6 +28,4 @@ class SensorValor(Lista):
                 'hora': self.hora
             }
         
-    def addValor(self,valor):
-        SensorValor = SensorValor()
 

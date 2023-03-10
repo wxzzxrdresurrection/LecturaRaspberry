@@ -29,4 +29,7 @@ class Menu:
             else:
                 print("Opcion no valida")
     
+if __name__ == "__main__":
+    menu = Menu()
+    menu.menu()
             
