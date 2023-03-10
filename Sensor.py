@@ -116,13 +116,12 @@ class Sensor(Lista):
                 pulse_start = time.time()
             while GPIO.input(echo) == GPIO.HIGH:
                 pulse_end = time.time()
-                print(pulse_end)
-            pulse_duration = pulse_end - pulse_start
-            distance = pulse_duration * 17150
-            distance = round(distance, 2)
-            sensorvalor = SensorValor(sensor,distance,time.strftime("%d/%m/%y"),time.strftime("%H:%M:%S"))
-            print(sensorvalor)
-            print("Distance:",distance,"cm")
+                pulse_duration = pulse_end - pulse_start
+                distance = pulse_duration * 17150
+                distance = round(distance, 2)
+                sensorvalor = SensorValor(sensor,distance,time.strftime("%d/%m/%y"),time.strftime("%H:%M:%S"))
+                print(sensorvalor)
+                print("Distance:",distance,"cm")
     
     def estadoLed(self,sensor):
         pin = sensor.pines[0]
