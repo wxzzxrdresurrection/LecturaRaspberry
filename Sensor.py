@@ -117,7 +117,6 @@ class Sensor(Lista):
             while GPIO.input(echo) == GPIO.HIGH:
                 pulse_end = time.time()
                 print(pulse_end)
-                break
             pulse_duration = pulse_end - pulse_start
             distance = pulse_duration * 17150
             distance = round(distance, 2)
