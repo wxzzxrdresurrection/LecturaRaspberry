@@ -127,9 +127,9 @@ class Sensor(Lista):
         print(pin)
         led = LED(2)
         print("ENCENDER")
-        led.on()
+        led.value = 1
         print("APAGAR")
-        led.off()
+        led.value = 0
         
 
 
