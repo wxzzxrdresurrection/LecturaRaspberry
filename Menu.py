@@ -22,6 +22,7 @@ class Menu:
             elif opcion == "2":
                 self.sns.read(temp)
             elif opcion == "3":
+                print("Led")
                 self.sns.read(led)
             elif opcion == "4":
                 print("Adios")
