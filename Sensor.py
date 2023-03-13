@@ -115,7 +115,6 @@ class Sensor(Lista):
             GPIO.output(trigger, False)
             print("Esperando respuesta")
             while GPIO.input(echo) == GPIO.LOW:
-                print("Esperando")
                 pulse_start = time.time()
             while GPIO.input(echo) == GPIO.HIGH:
                 pulse_end = time.time()
