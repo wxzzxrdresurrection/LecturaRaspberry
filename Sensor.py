@@ -74,8 +74,9 @@ class Sensor(Lista):
     def read(self,sensor):
         key = self.getKey(sensor)
         print(key)
+        return self.readTemp(sensor)
         if key == "DHT11":
-            return 1
+            return self.readTemp(sensor)
         elif key == "US":
             return self.readUltra(sensor)
         elif key == "LED":
@@ -87,7 +88,7 @@ class Sensor(Lista):
         dhtDevice = Adafruit_DHT.DHT11
         pin = sensor.pines[0]
         try:
-            humedad, temperatura = dhtDevice.read(sensor,pin)
+            humedad, temperatura = Adafruit_DHT.read_retry(dhtDevice, pin)
             return temperatura, humedad
         except:
             return "Error"
