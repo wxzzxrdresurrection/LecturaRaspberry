@@ -87,7 +87,7 @@ class Sensor(Lista):
         dhtDevice = Adafruit_DHT.DHT11
         pin = sensor.pines[0]
         try:
-            humedad, temperatura = dhtDevice.read(pin)
+            humedad, temperatura = dhtDevice.read(sensor,pin)
             return temperatura, humedad
         except:
             return "Error"
