@@ -1,7 +1,7 @@
 import RPi.GPIO as GPIO
 import time 
 from Lista import Lista
-#import Adafruit_DHT
+import Adafruit_DHT
 from gpiozero import LED
 from Mongo import Mongo
 from SensorValor import SensorValor
