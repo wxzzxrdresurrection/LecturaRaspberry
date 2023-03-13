@@ -75,7 +75,7 @@ class Sensor(Lista):
         key = self.getKey(sensor)
         print(key)
         if key == "DHT11":
-            return self.readTemp(sensor)
+            return 1
         elif key == "US":
             return self.readUltra(sensor)
         elif key == "LED":
