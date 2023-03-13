@@ -89,7 +89,10 @@ class Sensor(Lista):
         pin = sensor.pines[0]
         try:
             humedad, temperatura = Adafruit_DHT.read_retry(dhtDevice, pin)
-            return temperatura, humedad
+            if humedad is not None and temperatura is not None:
+                print('Temp={0:0.1f}*C  Humidity={1:0.1f}%'.format(temperatura, humedad))
+            else:
+                print('Failed to get reading. Try again!')
         except:
             return "Error"
      
