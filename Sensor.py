@@ -17,7 +17,7 @@ class Sensor(Lista):
         self.listasensorvalor = SensorValor()
         #self.mongo = Mongo()
         super().__init__()
-        GPIO.setmode(GPIO.BCM)
+        GPIO.setmode(GPIO.BOARD)
 
     def __str__(self):
         if len(self.lista) > 0:
