@@ -87,7 +87,9 @@ class Sensor(Lista):
     def readTemp(self,sensor):
         dhtDevice = Adafruit_DHT.DHT11
         pin = sensor.pines[0]
+        print("preparando sensor")
         try:
+            print("Iniciando sensor")
             humedad, temperatura = Adafruit_DHT.read_retry(dhtDevice, pin)
             if humedad is not None and temperatura is not None:
                 print('Temp={0:0.1f}*C  Humidity={1:0.1f}%'.format(temperatura, humedad))
