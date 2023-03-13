@@ -76,7 +76,7 @@ class Sensor(Lista):
         print(key)
         if key == "DHT11":
             return self.readTemp(sensor)
-        elif key == "Ultrasonico":
+        elif key == "US":
             return self.readUltra(sensor)
         elif key == "LED":
             return self.estadoLed(sensor)
@@ -99,8 +99,8 @@ class Sensor(Lista):
             """
      
     def readUltra(self,sensor):
-        trigger = sensor.pines[0]
-        echo = sensor.pines[1]
+        trigger = sensor.pines[1]
+        echo = sensor.pines[0]
         GPIO.setup(trigger, GPIO.OUT)
         GPIO.setup(echo, GPIO.IN)
         pulse_start = 0
@@ -120,7 +120,6 @@ class Sensor(Lista):
             while GPIO.input(echo) == GPIO.HIGH:
                 pulse_end = time.time()
                 pulse_duration = pulse_end - pulse_start
-                return pulse_duration
             distance = pulse_duration * 17150
             distance = round(distance, 2)
             sensorvalor = SensorValor(sensor,distance,time.strftime("%d/%m/%y"),time.strftime("%H:%M:%S"))
