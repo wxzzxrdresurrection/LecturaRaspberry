@@ -68,17 +68,17 @@ class Sensor(Lista):
                         'pines' : self.pines,
                     }
 
-    def getType(self,sensor):
-        return sensor.tipo
+    def getKey(self,sensor):
+        return sensor.clave
     
     def read(self,sensor):
-        tipo = self.getType(sensor)
-        print(tipo)
-        if tipo == "DHT11":
+        key = self.getKey(sensor)
+        print(key)
+        if key == "DHT11":
             return self.readTemp(sensor)
-        elif tipo == "Ultrasonico":
+        elif key == "Ultrasonico":
             return self.readUltra(sensor)
-        elif tipo == "LED":
+        elif key == "LED":
             return self.estadoLed(sensor)
         else:
             return "Error"
@@ -133,7 +133,7 @@ class Sensor(Lista):
         print(pin)
         GPIO.output(2,GPIO.HIGH)
         print("ENCENDER")
-        GPIO.output(2,GPIO.HIGH)
+        GPIO.output(2,GPIO.LOW)
         print("APAGAR")
         
         
