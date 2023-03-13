@@ -131,6 +131,7 @@ class Sensor(Lista):
         pin = sensor.pines[0]
         GPIO.setup(pin,GPIO.OUT)
         print(pin)
+        GPIO.output(pin,GPIO.HIGH)
         print("ENCENDER")
         GPIO.output(pin,GPIO.LOW)
         print("APAGAR")
