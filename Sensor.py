@@ -133,6 +133,7 @@ class Sensor(Lista):
         print(pin)
         GPIO.output(pin,GPIO.HIGH)
         print("ENCENDER")
+        time.sleep(5)
         GPIO.output(pin,GPIO.LOW)
         print("APAGAR")
         

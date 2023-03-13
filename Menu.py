@@ -9,7 +9,7 @@ class Menu:
     def menu(self):
         us = Sensor("US","Ultrasonico","US1", [29,31], "Puerta")
         temp = Sensor("DHT11","Temperatura","DHT1", [4], "Cocina")
-        led = Sensor("LED","LED","LED1", [12], "Foco")
+        led = Sensor("LED","LED","LED1", [16], "Foco")
         while True:
             print("Menu de opciones")
             print("1.-Leer ultrasonico")
