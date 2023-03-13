@@ -84,19 +84,13 @@ class Sensor(Lista):
             return "Error"
         
     def readTemp(self,sensor):
-        """
         dhtDevice = Adafruit_DHT.DHT11
         pin = sensor.pines[0]
         try:
             humedad, temperatura = dhtDevice.read(pin)
-            sensorvalor = SensorValor(sensor,temperatura,time.strftime("%d/%m/%y"),time.strftime("%H:%M:%S"))
-            sensorvalor2 = SensorValor(sensor,humedad,time.strftime("%d/%m/%y"),time.strftime("%H:%M:%S"))
-            print(sensorvalor)
-            print(sensorvalor2)
             return temperatura, humedad
         except:
             return "Error"
-            """
      
     def readUltra(self,sensor):
         trigger = sensor.pines[1]
