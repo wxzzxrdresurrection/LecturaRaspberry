@@ -6,9 +6,10 @@ from JsonClass import Conversion
 
 class Mongo(Conversion):
 
-    def __init__(self,nombrecoleccion):
+    def __init__(self,nombrecoleccion,bd):
         self.cadena = 'mongodb+srv://wizzard:Luis200315@cluster0.gbgv62y.mongodb.net/?retryWrites=true&w=majority'
         self.nombrecoleccion = nombrecoleccion
+        self.bd = bd
         super().__init__()
 
     def testConnection(self):

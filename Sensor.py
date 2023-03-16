@@ -15,7 +15,7 @@ class Sensor(Lista):
         self.pines = pines
         self.descripcion = descripcion
         self.listasensorvalor = SensorValor()
-        #self.mongo = Mongo()
+        self.mongo = Mongo("ValoresRaspberry","Raspberry")
         super().__init__()
         GPIO.setmode(GPIO.BOARD)
 
@@ -88,15 +88,16 @@ class Sensor(Lista):
         dhtDevice = Adafruit_DHT.DHT11
         pin = sensor.pines[0]
         print("preparando sensor")
-        try:
-            print("Iniciando sensor")
-            humedad, temperatura = Adafruit_DHT.read(dhtDevice, pin)
-            if humedad is not None and temperatura is not None:
-                print('Temp={0:0.1f}*C  Humidity={1:0.1f}%'.format(temperatura, humedad))
-            else:
-                print('Failed to get reading. Try again!')
-        except:
-            return "Error"
+        while True:
+            try:
+                print("Iniciando sensor")
+                humedad, temperatura = Adafruit_DHT.read(dhtDevice, pin)
+                if humedad is not None and temperatura is not None:
+                    print('Temp={0:0.1f}*C  Humidity={1:0.1f}%'.format(temperatura, humedad))
+                else:
+                    print('Failed to get reading. Try again!')
+            except:
+                return "Error"
      
     def readUltra(self,sensor):
         trigger = sensor.pines[1]
@@ -121,6 +122,8 @@ class Sensor(Lista):
                 pulse_duration = pulse_end - pulse_start
             distance = pulse_duration * 17150
             distance = round(distance, 2)
+            nuevosensor = SensorValor(sensor,distance,time.strftime("%d%m%Y"),time.strftime("%H%M%S"))
+            self.mongo.insertarAMongo(nuevosensor)
             print("Distance:",distance,"cm")
     
     def estadoLed(self,sensor):
