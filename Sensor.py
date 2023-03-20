@@ -74,7 +74,6 @@ class Sensor(Lista):
     def read(self,sensor):
         key = self.getKey(sensor)
         print(key)
-        return self.readTemp(sensor)
         if key == "DHT11":
             return self.readTemp(sensor)
         elif key == "US":
