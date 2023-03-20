@@ -50,7 +50,7 @@ class Mongo(Conversion):
         if con != False:
             #ENTRAR A COLECCION
             basasedatos = con[self.bd] 
-            coleccion = basasedatos[self.coleccion]
+            coleccion = basasedatos[self.nombrecoleccion]
             #VERIFICAR SI EL ARCHIVO SIN CONEXION TIENE CONTENIDO
             if os.path.exists('sensoresOffline.json'):
                 #docDesconectado = self.leerjson('sensoresOffline')
