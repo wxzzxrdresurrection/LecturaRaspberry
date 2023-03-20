@@ -123,7 +123,8 @@ class Sensor(Lista):
             distance = round(distance, 2)
             nuevosensor = SensorValor(sensor,distance,time.strftime("%d%m%Y"),time.strftime("%H%M%S"))
             #self.mongo.insertarAMongo(nuevosensor)
-            #print(nuevosensor)
+            self.listasensorvalor.agregar(nuevosensor)
+            self.guardarjson('listasensorvalor',self.listasensorvalor.getDict())
             print("Distance:",distance,"cm")
     
     def estadoLed(self,sensor):
