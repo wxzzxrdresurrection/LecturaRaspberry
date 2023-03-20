@@ -1,7 +1,5 @@
 import time
 from Lista import Lista
-from Mongo import Mongo
-
 
 class SensorValor(Lista):
 
