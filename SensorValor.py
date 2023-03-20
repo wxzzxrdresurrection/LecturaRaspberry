@@ -10,6 +10,7 @@ class SensorValor(Lista):
         self.valor = valor
         self.fecha = fecha
         self.hora = hora
+        super().__init__()
 
     def __str__(self):
         return f'Sensor: {self.sensor}, Valor: {self.valor}, Fecha: {self.fecha}, Hora: {self.hora}'
