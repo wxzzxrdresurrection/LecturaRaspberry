@@ -1,12 +1,21 @@
 [
     {
-        "clave": "US1",
+        "clave": "US",
         "tipo": "Ultrasonico",
         "id": "US1",
         "descripcion": "Puerta",
         "pines": [
-            7,
-            8
+            29,
+            31
+        ]
+    },
+    {
+        "clave": "DHT11",
+        "tipo": "Temperatura",
+        "id": "DHT11",
+        "descripcion": "Cocina",
+        "pines": [
+            7
         ]
     }
 ]
