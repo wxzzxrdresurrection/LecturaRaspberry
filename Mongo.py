@@ -2,6 +2,7 @@ from pymongo import MongoClient
 from tqdm import tqdm
 import time
 import os
+from SensorValor import SensorValor
 from JsonClass import Conversion
 
 class Mongo(Conversion):
@@ -10,6 +11,8 @@ class Mongo(Conversion):
         self.cadena = 'mongodb+srv://wizzard:Luis200315@cluster0.gbgv62y.mongodb.net/?retryWrites=true&w=majority'
         self.nombrecoleccion = nombrecoleccion
         self.bd = bd
+        self.listaoffline= SensorValor()
+        self.listatemporal = SensorValor()
         super().__init__()
 
     def testConnection(self):
@@ -69,10 +72,10 @@ class Mongo(Conversion):
 
 #METODO PARA GUARDAR SIN CONEXION
     def guardarEnLocal(self,data):
-        self.listaoffline.insere(data)
+        self.listaoffline.agregar(data)
         self.guardarjson('sensoresOffline',self.listaoffline.getDict())
         
     
     def guardarJSONTemporal(self,objeto):
-        self.listatemporal.insere(objeto)
+        self.listatemporal.agregar(objeto)
         self.guardarjson('sensoresTemporales',self.listatemporal.getDict())
