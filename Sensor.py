@@ -88,20 +88,18 @@ class Sensor(Lista):
         pin = sensor.pines[0]
         print(pin)
         while True:
-            try:
-                print("Iniciando sensor")
-                humedad, temperatura = Adafruit_DHT.read(dhtDevice, pin)
-                if humedad is not None and temperatura is not None:
-                    nuevosensor = SensorValor(sensor,temperatura,time.strftime("%d%m%Y"),time.strftime("%H%M%S"))
-                    nuevosensor2 = SensorValor(sensor,humedad,time.strftime("%d%m%Y"),time.strftime("%H%M%S"))
-                    print('Temp={0:0.1f}*C  Humidity={1:0.1f}%'.format(temperatura, humedad))
-                    #self.mongo.insertarAMongo(nuevosensor.getDict())
-                    #self.mongo.insertarAMongo(nuevosensor2.getDict())
-                    return
-                else:
-                    print('Failed to get reading. Try again!')
-            except:
-                return "Error"
+            print("Iniciando sensor")
+            humedad, temperatura = Adafruit_DHT.read(dhtDevice, pin)
+            if humedad is not None and temperatura is not None:
+                nuevosensor = SensorValor(sensor,temperatura,time.strftime("%d%m%Y"),time.strftime("%H%M%S"))
+                nuevosensor2 = SensorValor(sensor,humedad,time.strftime("%d%m%Y"),time.strftime("%H%M%S"))
+                print('Temp={0:0.1f}*C  Humidity={1:0.1f}%'.format(temperatura, humedad))
+                #self.mongo.insertarAMongo(nuevosensor.getDict())
+                #self.mongo.insertarAMongo(nuevosensor2.getDict())
+                return
+            else:
+                print('Failed to get reading. Try again!')
+            
      
     def readUltra(self,sensor):
         trigger = sensor.pines[1]
@@ -137,7 +135,7 @@ class Sensor(Lista):
         print(pin)
         GPIO.output(pin,GPIO.HIGH)
         print("ENCENDER")
-        time.sleep(5)
+        time.sleep(2)
         GPIO.output(pin,GPIO.LOW)
         print("APAGAR")
         
