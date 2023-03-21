@@ -15,7 +15,8 @@ class Menu:
             print("1.-Leer ultrasonico")
             print("2.-Leer temperatura")
             print("3.-Led")
-            print("4.-Salir")
+            print("4.-Leer todos")
+            print("5.-Salir")
             opcion = input("Ingrese una opcion: ")
             if opcion == "1":
                 self.sns.read(us)
@@ -26,7 +27,7 @@ class Menu:
                 self.sns.read(led)
             elif opcion == "4":
                 self.sns.readTodos()
-            elif opcion == "4":
+            elif opcion == "5":
                 print("Adios")
                 break
             else:
