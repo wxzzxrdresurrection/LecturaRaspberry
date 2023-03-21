@@ -95,8 +95,8 @@ class Sensor(Lista):
                     nuevosensor = SensorValor(sensor,temperatura,time.strftime("%d%m%Y"),time.strftime("%H%M%S"))
                     nuevosensor2 = SensorValor(sensor,humedad,time.strftime("%d%m%Y"),time.strftime("%H%M%S"))
                     print('Temp={0:0.1f}*C  Humidity={1:0.1f}%'.format(temperatura, humedad))
-                    self.mongo.insertarAMongo(nuevosensor.getDict())
-                    self.mongo.insertarAMongo(nuevosensor2.getDict())
+                    #self.mongo.insertarAMongo(nuevosensor.getDict())
+                    #self.mongo.insertarAMongo(nuevosensor2.getDict())
                     return
                 else:
                     print('Failed to get reading. Try again!')
@@ -141,7 +141,7 @@ class Sensor(Lista):
         GPIO.output(pin,GPIO.LOW)
         print("APAGAR")
         
-    def todos(self):
+    def readTodos(self):
         listasensores = self.getObjfromList("listasensores")
         for sensor in listasensores:
             self.read(sensor)

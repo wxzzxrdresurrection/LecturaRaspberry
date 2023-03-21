@@ -17,5 +17,14 @@
         "pines": [
             7
         ]
+    },
+    {
+        "clave":"LED",
+        "tipo":"LED",
+        "id":"LED1",
+        "descripcion":"Foco",
+        "pines":[
+            16
+        ]
     }
 ]

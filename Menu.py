@@ -25,7 +25,7 @@ class Menu:
                 print("Led")
                 self.sns.read(led)
             elif opcion == "4":
-                self.sns.todos()
+                self.sns.readTodos()
             elif opcion == "4":
                 print("Adios")
                 break
