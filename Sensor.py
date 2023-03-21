@@ -93,6 +93,8 @@ class Sensor(Lista):
             nuevosensor2 = SensorValor(sensor,humedad,time.strftime("%d%m%Y"),time.strftime("%H%M%S"))
             #self.mongo.insertarAMongo(nuevosensor.getDict())
             #self.mongo.insertarAMongo(nuevosensor2.getDict())
+            print(temperatura)
+            print(humedad)
             return
     
                 
