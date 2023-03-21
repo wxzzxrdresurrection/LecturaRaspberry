@@ -86,7 +86,7 @@ class Sensor(Lista):
     def readTemp(self,sensor):
         dhtDevice = Adafruit_DHT.DHT11
         pin = sensor.pines[0]
-        print("preparando sensor")
+        print(pin)
         while True:
             try:
                 print("Iniciando sensor")
