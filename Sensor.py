@@ -88,17 +88,18 @@ class Sensor(Lista):
         pin = sensor.pines[0]
         print(pin)
         while True:
-            print("Iniciando sensor")
-            humedad, temperatura = Adafruit_DHT.read(dhtDevice, pin)
-            if humedad is not None and temperatura is not None:
+            print("Iniciando sensor")            
+            try:
+                humedad, temperatura = Adafruit_DHT.read(dhtDevice, pin)    
                 nuevosensor = SensorValor(sensor,temperatura,time.strftime("%d%m%Y"),time.strftime("%H%M%S"))
                 nuevosensor2 = SensorValor(sensor,humedad,time.strftime("%d%m%Y"),time.strftime("%H%M%S"))
                 print('Temp={0:0.1f}*C  Humidity={1:0.1f}%'.format(temperatura, humedad))
                 #self.mongo.insertarAMongo(nuevosensor.getDict())
                 #self.mongo.insertarAMongo(nuevosensor2.getDict())
                 return
-            else:
-                print('Failed to get reading. Try again!')
+            except:
+                print("Error")
+                
             
      
     def readUltra(self,sensor):
