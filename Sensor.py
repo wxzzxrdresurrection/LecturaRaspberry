@@ -5,7 +5,6 @@ import adafruit_dht
 from gpiozero import LED
 from Mongo import Mongo
 from SensorValor import SensorValor
-import board
 
 class Sensor(Lista):
     
@@ -85,7 +84,7 @@ class Sensor(Lista):
             return "Error"
         
     def readTemp(self,sensor):
-        dhtDevice = adafruit_dht.DHT11(board.D17)
+        dhtDevice = adafruit_dht.DHT11(11)
         pin = sensor.pines[0]
         while True:
             print("Iniciando sensor")            
