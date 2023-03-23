@@ -96,9 +96,10 @@ class Sensor(Lista):
                 #self.mongo.insertarAMongo(nuevosensor2.getDict())
                 print(temperatura)
                 print(humedad)
+                return
             else:
                 print("Fallo la lectura. Intente de nuevo!")
-            return
+            
     
                 
             
