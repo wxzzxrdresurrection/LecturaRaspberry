@@ -1,10 +1,11 @@
 import RPi.GPIO as GPIO
 import time 
 from Lista import Lista
-import Adafruit_DHT
+import adafruit_dht
 from gpiozero import LED
 from Mongo import Mongo
 from SensorValor import SensorValor
+import board
 
 class Sensor(Lista):
     
@@ -84,11 +85,12 @@ class Sensor(Lista):
             return "Error"
         
     def readTemp(self,sensor):
-        dhtDevice = Adafruit_DHT.DHT11
+        dhtDevice = adafruit_dht.DHT11(board.D17)
         pin = sensor.pines[0]
         while True:
             print("Iniciando sensor")            
-            humedad, temperatura = Adafruit_DHT.read(dhtDevice, pin)
+            humedad = dhtDevice.humidity
+            temperatura = dhtDevice.temperature
             if humedad is not None and temperatura is not None:    
                 nuevosensor = SensorValor(sensor,temperatura,time.strftime("%d%m%Y"),time.strftime("%H%M%S"))
                 nuevosensor2 = SensorValor(sensor,humedad,time.strftime("%d%m%Y"),time.strftime("%H%M%S"))
