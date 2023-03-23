@@ -86,9 +86,9 @@ class Sensor(Lista):
     def readTemp(self,sensor):
         dhtDevice = dht11.DHT11(pin=sensor.pines[0])
         pin = sensor.pines[0]
-        print("Iniciando sensor")            
-        result = dhtDevice.read()
         while True:    
+            print("Iniciando sensor")            
+            result = dhtDevice.read()
             if result.is_valid():    
                 nuevosensor = SensorValor(sensor,result.temperature,time.strftime("%d%m%Y"),time.strftime("%H%M%S"))
                 nuevosensor2 = SensorValor(sensor,result.humidity,time.strftime("%d%m%Y"),time.strftime("%H%M%S"))
@@ -98,7 +98,7 @@ class Sensor(Lista):
                 print(result.humidity)
                 return
             else:
-                print("Fallo la lectura. Intente de nuevo!")
+                print(result.error_code)
             
     
                 
