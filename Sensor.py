@@ -22,6 +22,7 @@ class Sensor(Lista):
     def __str__(self):
         if len(self.lista) > 0:
             longitud =len(self.lista)
+            print("Longitud: ",longitud)
         else:
             pass
     
