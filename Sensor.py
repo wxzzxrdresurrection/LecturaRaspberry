@@ -123,7 +123,7 @@ class Sensor(Lista):
             distance = pulse_duration * 17150
             distance = round(distance, 2)
             nuevosensor = SensorValor(sensor,distance,time.strftime("%d%m%Y"),time.strftime("%H%M%S"))
-            #self.mongo.insertarAMongo(nuevosensor)
+            self.mongo.insertarAMongo(nuevosensor)
             print("Distance:",distance,"cm")
             return
     
