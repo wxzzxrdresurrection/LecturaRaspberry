@@ -54,6 +54,7 @@ class Sensor(Lista):
         print(data[2])
         listasensores = Sensor()
         for p in data:
+            print(p)
             listasensores.agregar(Sensor(p['clave'],p['tipo'],p['id'],p['pines'],p['descripcion']))
         return listasensores
 
