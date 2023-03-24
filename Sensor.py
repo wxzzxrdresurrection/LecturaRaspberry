@@ -140,7 +140,6 @@ class Sensor(Lista):
     def readTodos(self):
         listasensores = self.getObjfromList("listasensores")
         print(listasensores)
-        listasensores.mostrar()
         for sensor in listasensores:
             print(sensor)
             self.read(sensor)
