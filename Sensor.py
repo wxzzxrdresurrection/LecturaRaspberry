@@ -16,6 +16,7 @@ class Sensor(Lista):
         self.descripcion = descripcion
         self.listasensorvalor = SensorValor()
         self.mongo = Mongo("ValoresRaspberry","Raspberry")
+        self.dhtDevice = Adafruit_DHT.DHT11
         super().__init__()
         GPIO.setmode(GPIO.BOARD)
 
@@ -49,9 +50,6 @@ class Sensor(Lista):
 
     def getObjfromList(self,archivo):
         data = self.leerjson(archivo)
-        print(data[0])
-        print(data[1])
-        print(data[2])
         listasensores = Sensor()
         for p in data:
             print(p)
@@ -89,9 +87,9 @@ class Sensor(Lista):
             return "Error"
         
     def readTemp(self,sensor):
-        dhtDevice = Adafruit_DHT.DHT11
+        
         while True:    
-            humedad, temperatura = Adafruit_DHT.read_retry(11, 11)
+            humedad, temperatura = Adafruit_DHT.read(self.dhtDevice, sensor.pines[0])
             if humedad is not None and temperatura is not None: 
                 nuevosensor = SensorValor(sensor,temperatura,time.strftime("%d%m%Y"),time.strftime("%H%M%S"))
                 nuevosensor2 = SensorValor(sensor,humedad,time.strftime("%d%m%Y"),time.strftime("%H%M%S"))
@@ -143,6 +141,8 @@ class Sensor(Lista):
         
     def readTodos(self):
         listasensores = self.getObjfromList("listasensores")
+        print(listasensores)
+        listasensores.mostrar()
         for sensor in listasensores:
             print(sensor)
             self.read(sensor)
