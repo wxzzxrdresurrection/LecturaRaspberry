@@ -50,11 +50,9 @@ class Sensor(Lista):
 
     def getObjfromList(self,archivo):
         data = self.leerjson(archivo)
-        listasensores = Sensor()
         for p in data:
-            print(p)
-            listasensores.agregar(Sensor(p['clave'],p['tipo'],p['id'],p['pines'],p['descripcion']))
-        return listasensores
+            self.lista.append(Sensor(p['clave'],p['tipo'],p['id'],p['pines'],p['descripcion']))
+        return self.lista
 
     def getDict(self):
         if len(self.lista) > 0 :
