@@ -87,7 +87,7 @@ class Sensor(Lista):
     def readTemp(self,sensor):
         dhtDevice = Adafruit_DHT.DHT11
         while True:    
-            humedad, temperatura = Adafruit_DHT.read(dhtDevice, sensor.pines[0])
+            humedad, temperatura = Adafruit_DHT.read_retry(11, 11)
             if humedad is not None and temperatura is not None: 
                 nuevosensor = SensorValor(sensor,temperatura,time.strftime("%d%m%Y"),time.strftime("%H%M%S"))
                 nuevosensor2 = SensorValor(sensor,humedad,time.strftime("%d%m%Y"),time.strftime("%H%M%S"))
