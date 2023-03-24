@@ -99,11 +99,7 @@ class Sensor(Lista):
                 print("Humedad: ",result.humidity, "%")
                 return
             else:
-                print(result.error_code)
-            
-    
-                
-            
+                continue
      
     def readUltra(self,sensor):
         trigger = sensor.pines[1]
