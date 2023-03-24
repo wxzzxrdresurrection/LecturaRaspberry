@@ -10,21 +10,21 @@
         ]
     },
     {
-        "clave": "DHT11",
-        "tipo": "Temperatura",
-        "id": "DHT11",
-        "descripcion": "Cocina",
-        "pines": [
-            7
-        ]
-    },
-    {
         "clave":"LED",
         "tipo":"LED",
         "id":"LED1",
         "descripcion":"Foco",
         "pines":[
             16
+        ]
+    },
+    {
+        "clave": "DHT11",
+        "tipo": "Temperatura",
+        "id": "DHT11",
+        "descripcion": "Cocina",
+        "pines": [
+            7
         ]
     }
 ]
