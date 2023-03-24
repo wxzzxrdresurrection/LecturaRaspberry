@@ -49,6 +49,9 @@ class Sensor(Lista):
 
     def getObjfromList(self,archivo):
         data = self.leerjson(archivo)
+        print(data[0])
+        print(data[1])
+        print(data[2])
         listasensores = Sensor()
         for p in data:
             listasensores.agregar(Sensor(p['clave'],p['tipo'],p['id'],p['pines'],p['descripcion']))
