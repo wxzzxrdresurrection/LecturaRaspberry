@@ -86,7 +86,7 @@ class Sensor(Lista):
         
     def readTemp(self,sensor):
         dht = Adafruit_DHT.DHT11 
-        #instance = dht11.DHT11(sensor.pines[0])
+        instance = dht11.DHT11(sensor.pines[0])
         while True:
             result = instance.read()    
             humedad, temperatura = Adafruit_DHT.read_retry(dht, sensor.pines[0])
