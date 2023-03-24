@@ -86,7 +86,8 @@ class Sensor(Lista):
     def readTemp(self,sensor):
         instance = dht11.DHT11(sensor.pines[0])
         result = instance.read()    
-        while True:    
+        while True:
+            print("Iniciando Sensor")    
             if result.is_valid():
                 nuevosensor = SensorValor(sensor,result.temperature,time.strftime("%d%m%Y"),time.strftime("%H%M%S"))
                 nuevosensor2 = SensorValor(sensor,result.humidity,time.strftime("%d%m%Y"),time.strftime("%H%M%S"))
