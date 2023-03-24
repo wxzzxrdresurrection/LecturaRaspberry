@@ -25,7 +25,7 @@ class Sensor(Lista):
             longitud =len(self.lista)
             print("Longitud: ",longitud)
         else:
-            pass
+            return "Clave: " + self.clave + " Tipo: " + self.tipo + " ID: " + self.id + " Pines: " + str(self.pines) + " Descripcion: " + self.descripcion
     
     def crearSensor(self):
         listasensores = Sensor()
