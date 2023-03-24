@@ -86,11 +86,11 @@ class Sensor(Lista):
         
     def readTemp(self,sensor):
         dht = Adafruit_DHT.DHT11 
-        instance = dht11.DHT11(sensor.pines[0])
+        #instance = dht11.DHT11(sensor.pines[0])
         while True:
-            #result = instance.read()    
+            result = instance.read()    
             humedad, temperatura = Adafruit_DHT.read_retry(dht, sensor.pines[0])
-            if humedad is not None and temperatura is not None:
+            if result.is_valid():
                 nuevosensor = SensorValor(sensor,temperatura,time.strftime("%d%m%Y"),time.strftime("%H%M%S"))
                 nuevosensor2 = SensorValor(sensor,humedad,time.strftime("%d%m%Y"),time.strftime("%H%M%S"))
                 self.mongo.insertarAMongo(nuevosensor.getDict())
