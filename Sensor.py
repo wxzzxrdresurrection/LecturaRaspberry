@@ -128,12 +128,11 @@ class Sensor(Lista):
     def estadoLed(self,sensor):
         pin = sensor.pines[0]
         GPIO.setup(pin,GPIO.OUT)
-        print(pin)
         GPIO.output(pin,GPIO.HIGH)
-        print("ENCENDER")
+        print("Led encendido")
         time.sleep(2)
         GPIO.output(pin,GPIO.LOW)
-        print("APAGAR")
+        print("Led apagado")
         
     def readTodos(self):
         listasensores = self.getObjfromList("listasensores")
