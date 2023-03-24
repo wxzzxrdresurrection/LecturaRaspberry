@@ -96,6 +96,7 @@ class Sensor(Lista):
                 print("Humedad: ",result.humidity, "%")
                 return
             else:
+                print("Intentando leer")
                 continue
      
     def readUltra(self,sensor):
