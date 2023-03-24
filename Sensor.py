@@ -87,7 +87,6 @@ class Sensor(Lista):
         
     def readTemp(self,sensor):
         dhtDevice = dht11.DHT11(pin=sensor.pines[0])
-        pin = sensor.pines[0]
         while True:    
             print("Iniciando sensor")            
             result = dhtDevice.read()
@@ -96,8 +95,8 @@ class Sensor(Lista):
                 nuevosensor2 = SensorValor(sensor,result.humidity,time.strftime("%d%m%Y"),time.strftime("%H%M%S"))
                 #self.mongo.insertarAMongo(nuevosensor.getDict())
                 #self.mongo.insertarAMongo(nuevosensor2.getDict())
-                print(result.temperature)
-                print(result.humidity)
+                print("Temperatura: ",result.temperature, "C")
+                print("Humedad: ",result.humidity, "%")
                 return
             else:
                 print(result.error_code)
@@ -146,7 +145,6 @@ class Sensor(Lista):
         
     def readTodos(self):
         listasensores = self.getObjfromList("listasensores")
-        print(listasensores)
         for sensor in listasensores:
             print(sensor)
             self.read(sensor)
