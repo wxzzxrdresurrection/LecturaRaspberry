@@ -97,7 +97,7 @@ class Sensor(Lista):
                 return
             else:
                 print("Intentando leer")
-                time.sleep(2)
+                time.sleep(1)
                 continue
      
     def readUltra(self,sensor):
