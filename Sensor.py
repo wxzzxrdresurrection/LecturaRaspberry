@@ -74,7 +74,6 @@ class Sensor(Lista):
     
     def read(self,sensor):
         key = self.getKey(sensor)
-        print(key)
         if key == "DHT11":
             return self.readTemp(sensor)
         elif key == "US":
@@ -107,14 +106,12 @@ class Sensor(Lista):
         pulse_start = 0
         pulse_end = 0
         pulse_duration = 0
-        print("Iniciando sensor")
         while True:
             GPIO.output(trigger, False)
             time.sleep(0.5)
             GPIO.output(trigger, True)
             time.sleep(0.00001)
             GPIO.output(trigger, False)
-            print("Esperando respuesta")
             while GPIO.input(echo) == GPIO.LOW:
                 pulse_start = time.time()
             while GPIO.input(echo) == GPIO.HIGH:
@@ -139,9 +136,9 @@ class Sensor(Lista):
         
     def readTodos(self):
         listasensores = self.getObjfromList("listasensores")
-        for sensor in listasensores:
-            print(sensor)
-            self.read(sensor)
+        while True:
+            for sensor in listasensores:
+                self.read(sensor)
 
 
 if __name__ == "__main__":

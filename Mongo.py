@@ -18,7 +18,6 @@ class Mongo(Conversion):
     def testConnection(self):
         try:
             myclient = MongoClient(self.cadena)
-            print("Conexion exitosa")
             return myclient
         except:
             print("Error de conexion")
