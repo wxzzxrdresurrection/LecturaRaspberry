@@ -2,6 +2,7 @@ import RPi.GPIO as GPIO
 import time 
 from Lista import Lista
 import dht11
+import Adafruit_DHT
 from gpiozero import LED
 from Mongo import Mongo
 from SensorValor import SensorValor
@@ -84,16 +85,18 @@ class Sensor(Lista):
             return "Error"
         
     def readTemp(self,sensor):
+        dht = Adafruit_DHT.DHT11 
         instance = dht11.DHT11(sensor.pines[0])
         while True:
-            result = instance.read()    
-            if result.is_valid():
-                nuevosensor = SensorValor(sensor,result.temperature,time.strftime("%d%m%Y"),time.strftime("%H%M%S"))
-                nuevosensor2 = SensorValor(sensor,result.humidity,time.strftime("%d%m%Y"),time.strftime("%H%M%S"))
+            #result = instance.read()    
+            humedad, temperatura = Adafruit_DHT.read_retry(dht, sensor.pines[0])
+            if humedad is not None and temperatura is not None:
+                nuevosensor = SensorValor(sensor,temperatura,time.strftime("%d%m%Y"),time.strftime("%H%M%S"))
+                nuevosensor2 = SensorValor(sensor,humedad,time.strftime("%d%m%Y"),time.strftime("%H%M%S"))
                 self.mongo.insertarAMongo(nuevosensor.getDict())
                 self.mongo.insertarAMongo(nuevosensor2.getDict())
-                print("Temperatura: ",result.temperature, "C")
-                print("Humedad: ",result.humidity, "%")
+                print("Temperatura: ",temperatura, "C")
+                print("Humedad: ",humedad, "%")
                 return
             else:
                 print("Intentando leer")
