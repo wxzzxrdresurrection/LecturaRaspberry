@@ -24,7 +24,7 @@
         "id": "DHT11",
         "descripcion": "Cocina",
         "pines": [
-            7
+            11
         ]
     }
 ]
