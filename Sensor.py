@@ -84,7 +84,8 @@ class Sensor(Lista):
             return "Error"
         
     def readTemp(self,sensor):
-        instance = dht11.DHT11(pin = sensor.pines[0])
+        GPIO.setmode(GPIO.BCM)
+        instance = dht11.DHT11(pin = 17)
         result = instance.read()    
         while True:    
             if result.is_valid():
