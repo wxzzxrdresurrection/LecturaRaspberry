@@ -16,7 +16,6 @@ class Sensor(Lista):
         self.descripcion = descripcion
         self.listasensorvalor = SensorValor()
         self.mongo = Mongo("ValoresRaspberry","Raspberry")
-        self.dhtDevice = Adafruit_DHT.DHT11
         super().__init__()
         GPIO.setmode(GPIO.BOARD)
         GPIO.setwarnings(False)
